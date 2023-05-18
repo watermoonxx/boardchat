@@ -46,6 +46,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="login.jsp">로그인</a></li>
 						<li><a href="join.jsp">회원가입</a></li>
+						<li><a href="join.jsp">회원탈퇴</a></li>
 					</ul>
 				</a>
 			</li>
