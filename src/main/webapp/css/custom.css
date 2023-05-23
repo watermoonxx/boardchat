@@ -16,6 +16,25 @@ input, button {
   border-radius: 0;
 }
 
+.btn-flex {
+  display: flex;
+  justify-content: center;
+}
+.btn-flex > input {
+  width: 30%;
+  margin: 0 10px;
+  line-height: 45px;
+  font-size: 16px;
+  max-width: 180px;
+  background-color: #3c90e2;
+}
+
+
+
+
+
+
+
 /* 테이블 */
 thead th {
   background-color: #3c90e2;
@@ -24,11 +43,37 @@ thead th {
   text-align: center;
 }
 
-h4 {
+/* h4 {
   text-align: center;
+} */
+
+/* 모달팝업창 디자인 */
+.vertical-alignment-helper {
+  display: table;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
 }
 
-/* 채팅창 디자인 */
+.vertical-alignment-center {
+  display: table-cell;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.modal-content {
+  width: inherit;
+  height: inherit;
+  margin: 0 auto;
+  pointer-events: all;
+}
+
+.modal-body {
+  font-size: 16px;
+}
+
+
+/* 채팅창 디자인 (CSS template)*/
 .portlet {
   margin-bottom: 15px;
   border: 1px solid #dddddd;
