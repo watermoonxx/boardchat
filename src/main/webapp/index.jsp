@@ -18,8 +18,8 @@
 	<% 
 		// userID로 세션 관리 
 		String userID = null;
-		if (session.getAttribute("userID") != null) { // 로그인을 했다면 
-			userID = (String) session.getAttribute("userID"); // session 값은 존재하는 것이고, userID에 해당 사용자의 값을 String으로 변환해서 넣어준다 -> 해당 사용자의 접속 유무를 파악할 수 있다 
+		if (session.getAttribute("userID") != null) {  
+			userID = (String) session.getAttribute("userID"); // 로그인을 했다면 session 값은 존재하는 것이고, userID에 해당 사용자의 값을 String으로 변환해서 넣어준다 -> 해당 사용자의 접속 유무를 파악할 수 있다 
 		}
 	%>
 	<nav class="navbar navbar-default">
@@ -35,6 +35,7 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="index.jsp">메인</a></li>
 				<li><a href="find.jsp">친구찾기</a></li>
+				<li><a href="boardList.jsp">자유게시판</a></li>
 			</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
