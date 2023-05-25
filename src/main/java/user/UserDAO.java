@@ -128,11 +128,11 @@ public class UserDAO {
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
-		return -1; // 데이터베이스 오류 
+		return -1; // 데이터베이스 오류 알림 
 	} // end of register() 
 		
-		
-	// userID에 해당하는 사용자 정보를 가져오는 함수 
+	
+	// 회원정보 가져오기: userID에 해당하는 사용자 정보를 가져오는 함수 
 	// user를 반환하므로 반환 타입은 UserDTO 
 	public UserDTO getUser(String userID) {
 		UserDTO user = new UserDTO();
@@ -173,7 +173,7 @@ public class UserDAO {
 		ResultSet rs = null;
 		
 		try {
-			con = pool.getConnection(); // 커넥션 풀 접근 
+			con = pool.getConnection();
 			String sql = "UPDATE USER1 SET userPwd = ?, userName = ?, phone = ?, zipcode = ?, address = ?, detailAddress = ? WHERE userID = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userPwd);
@@ -183,14 +183,13 @@ public class UserDAO {
 			pstmt.setString(5, address);
 			pstmt.setString(6, detailAddress);
 			pstmt.setString(7, userID); 
-			
 			return pstmt.executeUpdate(); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
-		return -1; // 데이터베이스 오류 
+		return -1; // 데이터베이스 오류 알림 
 	} // end of update() 
 	
 	
