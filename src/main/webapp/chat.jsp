@@ -11,32 +11,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
 <title>Insert title here</title>
-<!-- JS -->
-<script src="js/bootstrap.js"></script>
-<!-- Google font -->
-<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet"> -->
-
-<script type="text/javascript">
-	// 실제로 메시지를 보낼수 있도록 함수 구현 [8강]
-	function autoClosingAlert(selector, delay) {
-		let alert = $(selector).alert();
-		alert.show();
-		window.setTimeout(function { alert.hide() }, delay);
-	}
-	function submitFunction() {
-		
-	}
-
-
-
-</script>
-
-
-</head>
-<body>
-	<%
+<%
 	// userID로 세션 관리  
 	String userID = null;
 	if (session.getAttribute("userID") != null) { // 로그인을 했다면 
@@ -46,67 +21,95 @@
 	// 전송 버튼을 눌렀을 때 submitFunction()이 실행되는데, 우리는 데이터를 전송할 때 보내는 사람과 받는 사람을 모두 입력해야 하므로 매개 변수로 toID가 오도록 한다 
 	String toID = null;
 	if (request.getParameter("toID") != null) { // toID 값이 존재한다면 
-		toID = (String) request.getParameter("toID"); // 가지고 있는다 
+		toID = (String) request.getParameter("toID"); // toID 값을 가지고 있는다 
 	}
-	
-	
-	
-	
-	
-	
 
-	// 로그인이 되지 않은 상태에서 채팅 페이지에 접근했을 때 로그인 페이지로 돌려보냄 [9강]
+	// 로그인이 되지 않은 상태에서 채팅 페이지에 접근했을 때 로그인 페이지로 돌려보냄 [9]
 	if (userID == null) { // 로그인하지 않은 상태라면  
-		session.setAttribute("messageType", "오류 메시지");
-		session.setAttribute("messageContent", "로그인이 필요합니다!");
+		session.setAttribute("messageType", "알림 메시지");
+		session.setAttribute("messageContent", "로그인이 필요합니다.");
 		response.sendRedirect("login.jsp");
 		return;
 	}
-
 	// 대화 상대를 지정하지 않으면 채팅창 페이지로 돌려보냄
-	/* if (toID == null) { // 대화 상대 지정하지 않았다면   
-		session.setAttribute("messageType", "오류 메시지");
-		session.setAttribute("messageContent", "대화 상대가 지정되지 않았습니다!");
+	if (toID == null) { 
+		session.setAttribute("messageType", "알림 메시지");
+		session.setAttribute("messageContent", "대화 상대가 지정되지 않았습니다.");
 		response.sendRedirect("chat.jsp");
 		return;
-	} */
-	%>
+	}
+%>
+<!-- JS -->
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+	// 실제로 메시지를 보낼수 있도록 함수 구현 [8강]
+	function autoClosingAlert(selector, delay) {
+		let alert = $(selector).alert(); // selector에 해당하는 것을 
+		alert.show(); // 팝업처럼 보여줌 
+		window.setTimeout(function() {alert.hide()}, delay); // delay 시간만큼만 보여줄 수 있도록 처리 
+	}
+	
+	// 메시지를 보내는 함수 
+	function submitFunction() {
+		// userID 변수를 사용해야하므로 변수 선언 부분이 해당 코드보다 더 위쪽에 위치해야 한다 
+		let fromID = '<%= userID %>'; // 보내는 사람은 자기자신(현재 접속한 userID) 
+		let toID = '<%= toID %>'; // 받는 사람은 상대방(toID) 
+		let chatContent = $('#chatContent').val(); // 채팅 내용 값을 가져와서 chatContent 변수에 저장 
+		$.ajax({
+			type: "post",
+			url: "ChatSubmitServlet",
+			data: {
+				fromID: encodeURIComponent(fromID),
+				toID: encodeURIComponent(toID),
+				chatContent: encodeURIComponent(chatContent)
+			},
+			success: function(result) {
+				if (result == 1) {
+					autoClosingAlert('#successMessage', 3000); // 3초 
+				} else if (result == 0) {
+					autoClosingAlert('#dangerMessage', 3000);
+				} else {
+					autoClosingAlert('#warningMessage', 3000);
+				}
+				console.log("Ajax 통신 성공");
+			},
+			error: function() {
+                console.log("Ajax 통신 실패");
+            }
+		});
+		// 메시지 보낸 후 성공 여부에 상관없이 chatContent 값을 비워주는 처리 
+		$('#chatContent').val("");
+	}
+</script>
+
+</head>
+<body>
+	
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapse"
 				data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1"
 				aria-expanded="false"></button>
 			<!-- logo -->
-			<a href="index.jsp" class="navbar-brand">CHATTALK</a>
+			<a href="index.jsp" class="navbar-brand">logo</a>
 		</div>
 
 		<!-- navbar 메인 | 친구찾기 | 채팅 -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp">메인</a></li>
+				<li><a href="index.jsp">메인</a></li>
+				<li><a href="find.jsp">친구찾기</a></li>
 			</ul>
+			
 			<%
-			if (userID == null) { // 로그인을 하지 않은 상태라면
-			%>
-			<!-- 로그인을 하지 않은 상태일 때 -->
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="login.jsp">로그인</a></li>
-				<li><a href="join.jsp">회원가입</a></li>
-			</ul>
-
-			<%
-			} else {
+				if (userID != null) {
 			%>
 			<!-- 로그인한 상태일 때 -->
 			<ul class="nav navbar-nav navbar-right">
-				<!-- <li><a href="#">(신짱구) 님</a></li> -->
-				<li>
-					<a href="#">회원정보</a>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="logoutAction.jsp">로그아웃</a></li>
-					</ul>
-				</li>
+					<li><a href="#"><%= userID %> 님</a></li>
+					<li><a href="update.jsp">회원정보수정</a></li>
+					<li><a href="logoutAction.jsp">로그아웃</a></li>
 			</ul>
 			<%
 				}
@@ -123,7 +126,7 @@
 					<div class="portlet-heading"
 						style="height: 57px; display: flex; justify-content: center; align-items: center;">
 						<div class="portlet-title">
-							<h4 style="font-size: 18px;">실시간 채팅</h4>
+							<h4 style="font-size: 18px;">실시간 대화</h4>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -135,21 +138,13 @@
 
 						<!-- 채팅 footer -->
 						<div class="portlet-footer" style="border: 1px solid #dddddd;">
-							<div class="row">
-								<div class="form-group col-xs-4">
-									<input id="chatName" class="form-control" style="height: 40px;"
-										type="text" placeholder="이름" maxlength="8">
-									<!-- id="chatName" 어떤 사람이 채팅을 보냈는지 이름 명시 -->
-								</div>
-							</div>
 							<div class="row" style="height: 90px;">
 								<div class="form-group col-xs-10">
-									<textarea style="height: 80px; resize: none;"
-										chatContent" class="form-control" maxlength="100"
+									<textarea style="height: 80px; resize: none;" id="chatContent" class="form-control" maxlength="100"
 										placeholder="메시지를 입력하세요"></textarea>
 								</div>
 								<div class="form-group col-xs-2">
-									<button type="button" class="btn btn-default onclick="submitFunction();">전송</button>
+									<button type="button" class="btn btn-default" onclick="submitFunction();">전송</button>
 									<div class="clearfix"></div>
 								</div>
 							</div>
@@ -194,10 +189,8 @@
 		<div class="vertical-alignment-helper">
 			<div class="modal-dialog vertical-alignment-center">
 				<div
-					class="modal-content <%if (messageType.equals("오류 메시지"))
-	out.println("panel-warning");
-else
-	out.println("panel-success");%>">
+					class="modal-content <%if (messageType.equals("오류 메시지")) out.println("panel-warning");
+					else out.println("panel-success");%>">
 					<div class="modal-header panel-heading">
 						<button type="button" class="close" data-dismiss="modal">
 							<span aria-hidden="true">&times;</span>
