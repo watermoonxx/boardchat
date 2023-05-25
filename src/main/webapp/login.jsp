@@ -5,15 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<!-- Google font -->
-<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet"> -->
 <title>Insert title here</title>
 <!-- JS -->
 <script src="js/bootstrap.js"></script>
@@ -26,10 +22,10 @@
 			userID = (String) session.getAttribute("userID"); // session 값은 존재하는 것이고, userID에 해당 사용자의 값을 String으로 변환해서 넣어준다 -> 해당 사용자의 접속 유무를 파악할 수 있다 
 		}
 		
-		// 로그인 상태에서 회원가입 페이지에 접근했을 때 메인으로 돌려보냄 [9강]
+		// '로그인 상태에서' 회원가입 페이지에 접근했을 때 메인으로 돌려보냄 [9강]
 		if (userID != null) { // 로그인한 상태라면 
 			session.setAttribute("messageType", "오류 메시지");
-			session.setAttribute("messageContent", "현재 로그인 상태입니다.");
+			session.setAttribute("messageContent", "현재 로그인 상태입니다. 로그아웃 후 회원가입이 가능합니다.");
 			response.sendRedirect("index.jsp");
 			return; 
 		}
@@ -39,23 +35,26 @@
 			<button type="button" class="navbar-toggle collapse" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 			</button>
 			<!-- logo -->
-			<a href="index.jsp" class="navbar-brand">CHATTALK</a> 
+			<a href="index.jsp" class="navbar-brand">logo</a> 
 		</div>
 	
 	<!-- navbar 메인 | 친구찾기 | 채팅 -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp">메인</a></li>
+				<li><a href="index.jsp">메인</a></li>
+				<li><a href="find.jsp">친구찾기</a></li>
 			</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
 			%>
 			<!-- 로그인을 하지 않은 상태일 때 -->
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="login.jsp">로그인</a></li>
+				<li class="active"><a href="login.jsp">로그인</a></li>
 				<li><a href="join.jsp">회원가입</a></li>
 			</ul>
-			<% } %>
+			<% 
+				} 
+			%>
 		</div>
 	</nav>
 
@@ -82,21 +81,8 @@
 				<input class="btn btn-primary" type="button" value="회원가입" onclick="location.href='join.jsp'" style="background-color: #49545d;">
 				<input class="btn btn-primary" type="submit" value="로그인">
 			</div>
-
-
-
-
 		</form>
 	</div>
-
-
-
-
-	
-	
-	
-	
-	
 	
 	<!-- 서버로부터 메시지를 받아서 출력하는 부분 -->
 	<% 

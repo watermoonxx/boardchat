@@ -103,6 +103,7 @@ function findAddr() {
 		}
 		
 		// 로그인 상태에서 회원가입 페이지에 접근했을 때 메인으로 돌려보냄 [9강]
+		// 이후 navbar에서 로그인 상태라면 회원가입 버튼 삭제 
 		if (userID != null) { // 로그인한 상태라면 
 			session.setAttribute("messageType", "오류 메시지");
 			session.setAttribute("messageContent", "현재 로그인 상태입니다.");
@@ -115,13 +116,14 @@ function findAddr() {
 			<button type="button" class="navbar-toggle collapse" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 			</button>
 			<!-- logo -->
-			<a href="index.jsp" class="navbar-brand">CHATTALK</a> 
+			<a href="index.jsp" class="navbar-brand">logo</a> 
 		</div>
 	
 	<!-- navbar 메인 | 친구찾기 | 채팅 -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp">메인</a></li>
+				<li><a href="index.jsp">메인</a></li>
+				<li><a href="find.jsp">친구찾기</a></li>
 			</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
@@ -129,7 +131,7 @@ function findAddr() {
 			<!-- 로그인을 하지 않은 상태일 때 -->
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="login.jsp">로그인</a></li>
-				<li><a href="join.jsp">회원가입</a></li>
+				<li class="active"><a href="join.jsp">회원가입</a></li>
 			</ul>
 			<% } %>
 		</div>
