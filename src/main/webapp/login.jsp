@@ -23,6 +23,7 @@
 		}
 		
 		// '로그인 상태에서' 회원가입 페이지에 접근했을 때 메인으로 돌려보냄 [9강]
+		// 로그인 상태에서는 회원가입 페이지 메뉴가 사라지므로 일반적으로 접근은 불가능 
 		if (userID != null) { // 로그인한 상태라면 
 			session.setAttribute("messageType", "오류 메시지");
 			session.setAttribute("messageContent", "현재 로그인 상태입니다. 로그아웃 후 회원가입이 가능합니다.");
@@ -43,6 +44,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="index.jsp">메인</a></li>
 				<li><a href="find.jsp">친구찾기</a></li>
+				<li><a href="boardList.jsp">자유게시판</a></li>
 			</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
