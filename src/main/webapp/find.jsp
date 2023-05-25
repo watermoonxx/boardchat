@@ -92,6 +92,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="index.jsp">메인</a></li>
 				<li class="active"><a href="find.jsp">친구찾기</a></li>
+				<li><a href="boardList.jsp">자유게시판</a></li>
 			</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
