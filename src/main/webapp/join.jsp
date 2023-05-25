@@ -10,10 +10,6 @@
 <!-- CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
-<!-- Google font -->
-<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet"> -->
 <title>Insert title here</title>
 <!-- JS -->
 <script src="js/bootstrap.js"></script>
@@ -45,6 +41,23 @@
 			});
 		}
 	
+
+/*
+	// 아이디 입력 시 onkeydown  
+	function inputIdChk() {
+		regFrm1.idBtnCheck1.value = "idUnCheck"; // 중복확인 누르면 idCheck 로 값이 변경되어야 함 
+
+		/* 
+			regFrm -> <form name="regFrm">
+			idBtnCheck -> <input type="hidden" name="idBtnCheck" value="idUnCheck"> 
+
+		*/
+	
+
+
+
+
+
 	// 비밀번호 확인 
 	function passwordCheckFunction() {
 		let userPassword1 = $('#userPassword1').val();
@@ -106,7 +119,7 @@ function findAddr() {
 		// 이후 navbar에서 로그인 상태라면 회원가입 버튼 삭제 
 		if (userID != null) { // 로그인한 상태라면 
 			session.setAttribute("messageType", "오류 메시지");
-			session.setAttribute("messageContent", "현재 로그인 상태입니다.");
+			session.setAttribute("messageContent", "현재 로그인 상태입니다. 로그아웃 후 회원가입이 가능합니다.");
 			response.sendRedirect("index.jsp");
 			return; 
 		}
@@ -124,6 +137,7 @@ function findAddr() {
 			<ul class="nav navbar-nav">
 				<li><a href="index.jsp">메인</a></li>
 				<li><a href="find.jsp">친구찾기</a></li>
+				<li><a href="boardList.jsp">자유게시판</a></li>
 			</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
@@ -142,7 +156,7 @@ function findAddr() {
 	<!-- 서버로 전송되는 값 모든 <input> 태그에 value 속성 필요? -->
 			<!-- ID중복확인 버튼을 눌렀을 때 값이 바뀌도록 value 속성 필요  -->
 	<div class="container" style="width: 900px;">
-		<form action="UserRegisterServlet" method="post"> <!-- userRegister로 회원정보를 보냄 -->
+		<form action="UserRegisterServlet" method="post" name="regFrm1"> <!-- userRegister로 회원정보를 보냄 -->
 			<table class="table table-bordered table-hover" style="border: 1px solid #dddddd;">
 				<thead>
 					<tr>
@@ -152,8 +166,13 @@ function findAddr() {
 				<tbody>
 					<tr>
 						<td style="width: 110px;"><h5>아이디</h5></td>
-						<td><input name="userID" id="userID" class="form-control" type="text" maxlength="20" placeholder="아이디를 입력하세요"></td>
-						<td style="width: 110px;"><button class="btn btn-primary" onclick="registerCheckFunction();" type="button" style="background-color: #49545d;">중복확인</button></td>
+						<td>
+							<input name="userID" id="userID" class="form-control" type="text" maxlength="20" placeholder="아이디를 입력하세요" onkeydown="inputIdChk();">
+						</td>
+						<td style="width: 110px;">
+							<button class="btn btn-primary" onclick="registerCheckFunction();" type="button" style="background-color: #49545d;">중복확인</button>
+							<input type="hidden" name="idBtnCheck1" value="idUnCheck"> <!-- 중복확인 버튼을 눌렀을 때 값이 바뀌도록  -->
+						</td>
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>비밀번호</h5></td>
