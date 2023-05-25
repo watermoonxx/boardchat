@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/ChatListServlet")
 public class ChatListServlet extends HttpServlet {
@@ -40,6 +41,18 @@ public class ChatListServlet extends HttpServlet {
 		public String getTen() {
 			// json: 서버와 클라이언트가 문자를 주고 받는 규칙에 따라서 
 		}
+		*/
+
+		/* 회원정보수정 관련 [18]
+		HttpSession session = request.getSession();
+		if (!fromID.equals((String) session.getAttribute("userID"))) {
+		response.getWriter().write("");
+		(서블릿이므로 공백으로 출력)
+
+		session.setAttribute("messageType", "오류 메시지");
+		session.setAttribute("messageContent", "접근할 수 없습니다.");
+		response.sendRedirect("login.jsp");
+		return;
 		*/
 		
 		
