@@ -16,6 +16,7 @@ public class UserRegisterCheckServlet extends HttpServlet {
 		// 사용자에게 ID중복체크한 결과를 반환하는 서블릿
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
 		String userID = request.getParameter("userID"); // 사용자 입력값
 		response.getWriter().write(new UserDAO().registerCheck(userID) + ""); // 문자열 형태로 출력해서 사용자에게 반환
 
