@@ -100,6 +100,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="index.jsp">메인</a></li>
 				<li><a href="find.jsp">친구찾기</a></li>
+				<li><a href="boardList.jsp">자유게시판</a></li>
 			</ul>
 			
 			<%
