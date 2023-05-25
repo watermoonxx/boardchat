@@ -131,7 +131,7 @@ public class ChatDAO {
 		try {
 			con = pool.getConnection();
 			// String sql = "INSERT INTO CHAT VALUES(NULL, ?, ?, ?, NOW())"; // NULL 값을 넣어서 chatNUM이 자동으로 증가하게(?), NOW(): 현재 시각 의미  
-			String sql = "INSERT INTO CHAT VALUES(SEQ_CHAT.NEXTVAL, ?, ?, ?, NOW())"; // chatNum이 자동으로 증가할 수 있도록 시퀀스 사용, NOW(): 현재 시각 의미  
+			String sql = "INSERT INTO CHAT VALUES(SEQ_CHAT.NEXTVAL, ?, ?, ?, SYSDATE)"; // chatNum이 자동으로 증가할 수 있도록 시퀀스 사용, SYSDATE: 현재 시각 의미  
 
 			pstmt = con.prepareStatement(sql); // SQL 문장을 사용하기 직전까지 만들어 둔다
 			pstmt.setString(1, fromID);
