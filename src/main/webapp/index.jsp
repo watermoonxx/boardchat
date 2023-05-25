@@ -13,14 +13,10 @@
 <title>Insert title here</title>
 <!-- JS -->
 <script src="js/bootstrap.js"></script>
-<!-- Google font -->
-<!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet"> -->
 </head>
 <body>
 	<% 
-		// userID로 세션 관리  
+		// userID로 세션 관리 
 		String userID = null;
 		if (session.getAttribute("userID") != null) { // 로그인을 했다면 
 			userID = (String) session.getAttribute("userID"); // session 값은 존재하는 것이고, userID에 해당 사용자의 값을 String으로 변환해서 넣어준다 -> 해당 사용자의 접속 유무를 파악할 수 있다 
@@ -31,13 +27,14 @@
 			<button type="button" class="navbar-toggle collapse" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 			</button>
 			<!-- logo -->
-			<a href="index.jsp" class="navbar-brand">CHATTALK</a> 
+			<a href="index.jsp" class="navbar-brand">logo</a> 
 		</div>
 	
 		<!-- navbar 메인 | 친구찾기 | 채팅 -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="index.jsp">메인</a></li>
+				<li><a href="find.jsp">친구찾기</a></li>
 			</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
@@ -53,13 +50,9 @@
 			%>
 			<!-- 로그인한 상태일 때 -->
 			<ul class="nav navbar-nav navbar-right">
-				<!-- <li><a href="#">(신짱구) 님</a></li> -->
-				<li>
-					<a href="#">회원정보</a>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="logoutAction.jsp">로그아웃</a></li>
-					</ul>
-				</li>
+					<li><a href="#"><%= userID %> 님</a></li>
+					<li><a href="update.jsp">회원정보수정</a></li>
+					<li><a href="logoutAction.jsp">로그아웃</a></li>
 			</ul>
 			<%
 				}
