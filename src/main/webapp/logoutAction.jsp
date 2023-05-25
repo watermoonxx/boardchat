@@ -9,10 +9,13 @@
 </head>
 <body>
 	<%
-	session.invalidate();
+		session.invalidate();
+		request.getSession().setAttribute("messageType", "알림 메시지");
+		request.getSession().setAttribute("messageContent", "로그아웃 되었습니다.");
 	%>
 	<script>
 		// alert("로그아웃 되었습니다");
+		
 		location.href = "index.jsp";
 	</script>
 </body>
