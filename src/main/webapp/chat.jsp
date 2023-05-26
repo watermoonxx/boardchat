@@ -18,7 +18,7 @@
 		userID = (String) session.getAttribute("userID"); // session 값은 존재하는 것이고, userID에 해당 사용자의 값을 String으로 변환해서 넣어준다 -> 해당 사용자의 접속 유무를 파악할 수 있다 
 	}
 	
-	// 전송 버튼을 눌렀을 때 submitFunction()이 실행되는데, 우리는 데이터를 전송할 때 보내는 사람과 받는 사람을 모두 입력해야 하므로 매개 변수로 toID가 오도록 한다 
+	// 전송 버튼을 눌렀을 때 submitFunction()이 실행되는데, 데이터를 전송할 때 보내는 사람과 받는 사람을 모두 입력해야 하므로 매개 변수로 toID가 오도록 한다 
 	String toID = null;
 	if (request.getParameter("toID") != null) { // toID 값이 존재한다면 
 		toID = (String) request.getParameter("toID"); // toID 값을 가지고 있는다 
@@ -42,11 +42,11 @@
 <!-- JS -->
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript">
-	// 실제로 메시지를 보낼수 있도록 함수 구현 [8강]
-	function autoClosingAlert(selector, delay) {
-		let alert = $(selector).alert(); // selector에 해당하는 것을 
-		alert.show(); // 팝업처럼 보여줌 
-		window.setTimeout(function() {alert.hide()}, delay); // delay 시간만큼만 보여줄 수 있도록 처리 
+	// 실제로 메시지를 보낼수 있도록 함수 구현 [8]
+	function autoClosingAlert(selector1, delay) {
+		let alert1 = $(selector1).alert(); // selector에 해당하는 것을 
+		alert1.show(); // 팝업처럼 보여줌 
+		window.setTimeout(function() {alert1.hide()}, delay); // delay 시간만큼만 보여줄 수 있도록 처리 
 	}
 	
 	// 메시지를 보내는 함수 
@@ -101,6 +101,7 @@
 				<li><a href="index.jsp">메인</a></li>
 				<li><a href="find.jsp">친구찾기</a></li>
 				<li><a href="boardList.jsp">자유게시판</a></li>
+				<li><a href="chat.jsp">채팅</a></li>
 			</ul>
 			
 			<%
@@ -135,7 +136,9 @@
 
 						<!-- 채팅목록창 -->
 						<div id="chatlist" class="portlet-body chat-widget"
-							style="overflow-y: auto; width: auto; height: 450px;"></div>
+							style="overflow-y: auto; width: auto; height: 450px;">
+							
+						</div>
 
 						<!-- 채팅 footer -->
 						<div class="portlet-footer" style="border: 1px solid #dddddd;">
