@@ -78,7 +78,7 @@ public class UserDAO {
 	} // end of login() 
 	
 	
-	// ID중복확인 메소드 
+	// ID중복확인 메소드 & 친구찾기 기능 
 	public int registerCheck(String userID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -92,9 +92,9 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			
 			if (rs.next() || userID.equals("")) { // 아이디가 이미 존재하거나, 공백일경우 
-				return 0; // 이미 존재하는 회원 
+				return 0; // 이미 존재하는 회원 & 찾은 친구일 경우 
 			} else { // 그렇지 않은 경우 
-				return 1; // 가입 가능한 아이디 
+				return 1; // 가입 가능한 아이디 & 친구를 찾을 수 없음 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
