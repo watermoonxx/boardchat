@@ -43,14 +43,17 @@ public class ChatDAO {
 				ChatDTO chat = new ChatDTO();
 				chat.setChatNum(rs.getInt("chatNum"));
 				
-				// 특수문자 치환 [7강]
+				/*
+				// 특수문자 치환 [7]
 				chat.setFromID(rs.getString("fromID").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				chat.setToID(rs.getString("toID").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
 				chat.setChatContent(rs.getString("ChatContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;")
 						.replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				*/
 
+				
 				// 메시지 시간 처리 
 				int chatTime = Integer.parseInt(rs.getString("chatTime").substring(11, 13));
 				String timeType = "오전"; // 기본값을 오전으로 설정
