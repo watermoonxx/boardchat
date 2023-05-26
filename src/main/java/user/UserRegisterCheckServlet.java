@@ -18,6 +18,13 @@ public class UserRegisterCheckServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String userID = request.getParameter("userID"); // 사용자 입력값
+
+		// 세션 관리 
+		if (userID == null || userID.equals("")) {
+			response.getWriter().write("-1");
+			
+		}
+		
 		response.getWriter().write(new UserDAO().registerCheck(userID) + ""); // 문자열 형태로 출력해서 사용자에게 반환
 
 	}
