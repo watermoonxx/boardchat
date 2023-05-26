@@ -98,6 +98,7 @@ function findAddr() {
 				<li><a href="index.jsp">메인</a></li>
 				<li><a href="find.jsp">친구찾기</a></li>
 				<li><a href="boardList.jsp">자유게시판</a></li>
+				<li><a href="chat.jsp">채팅</a></li>
 			</ul>
 			
 			<!-- 로그인한 상태일 때 -->
