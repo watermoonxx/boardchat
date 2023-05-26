@@ -121,7 +121,14 @@ a:hover {
   min-height: 70px;
 }
 
-
+/* 친구찾기 */
+/* .searchCon {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} */
 
 
 
