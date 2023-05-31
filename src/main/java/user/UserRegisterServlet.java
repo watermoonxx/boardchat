@@ -47,7 +47,7 @@ public class UserRegisterServlet extends HttpServlet {
 			return;
 		}
 
-		// 코드가 이곳까지 작동했다면 오류가 없는 것이므로 회원가입 시켜줌
+		// 코드가 이곳까지 작동했다면 오류가 없는 것이므로 회원가입 진행 
 		int result = new UserDAO().register(userID, userPwd, userName, phone, zipcode, address, detailAddress,
 				userProfile);
 		if (result == 1) {
