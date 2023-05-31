@@ -12,7 +12,10 @@
 <!-- CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
-<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap" rel="stylesheet">
+<title>LET'S CHAT!</title>
 <!-- JS -->
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript">
@@ -30,12 +33,14 @@
 </head>
 <body>
 	<% 
+		
 		// userID로 세션 관리 
 		// 로그인을 했다면 
 		String userID = null;
 		if (session.getAttribute("userID") != null) { 
 			userID = (String) session.getAttribute("userID"); // session 값은 존재하는 것이고, userID에 해당 사용자의 값을 String으로 변환해서 넣어준다 -> 해당 사용자의 접속 유무를 파악할 수 있다 
 		}
+		
 		
 		// 로그인하지 않은 상태라면 
 		if (userID == null) {  
@@ -45,31 +50,34 @@
 			return;
 		}
 		
+		
 		// 로그인 상태라면 사용자의 정보를 변수 user에 저장 
 		UserDTO user = new UserDAO().getUser(userID);
+		
 	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
+	<nav class="navbar navbar-default" style="border: none;">
+		<!-- <div class="navbar-header">
 			<button type="button" class="navbar-toggle collapse" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 			</button>
-			<!-- logo -->
 			<a href="index.jsp" class="navbar-brand">logo</a> 
-		</div>
+		</div> -->
 	
 		
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
-				<li><a href="find.jsp">친구찾기</a></li>
-				<li class="active"><a href="boardList.jsp">자유게시판</a></li>
-				<li><a href="chat.jsp">채팅</a></li>
+			<ul class="nav navbar-nav" style="padding-top: 10px;">
+				<li class="active"><a href="index.jsp" style="padding-top: 10px;">
+					<img src="./img/logo_chat.svg" alt="" style="width: 30px; height: 30px;">
+				</a></li>
+				<li><a class="nav-ele" href="find.jsp">친구찾기</a></li>
+				<li><a class="nav-ele" href="boardList.jsp">자유게시판</a></li>
+				<li><a class="nav-ele" href="chat.jsp">채팅</a></li>
 			</ul>
 			
 			<!-- 로그인한 상태일 때 -->
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><%= userID %> 님</a></li>
-				<li><a href="update.jsp">회원정보수정</a></li>
-				<li><a href="logoutAction.jsp">로그아웃</a></li>
+			<ul class="nav navbar-nav navbar-right" style="padding-top: 10px;">
+				<li><a class="nav-ele" href="#"><%= userID %> 님</a></li>
+				<li><a class="nav-ele" href="update.jsp">회원정보수정</a></li>
+				<li><a class="nav-ele" href="logoutAction.jsp">로그아웃</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -100,22 +108,20 @@
                         <td>
                             <textarea class="form-control" name="boardContent" id="" cols="30" rows="10" maxlength="2048" placeholder="내용을 입력하세요" style="resize: none;"></textarea>
                         </td>
-                            
                     </tr>
                     <tr>
                         <td style="width: 110px;"><h5>파일 업로드</h5></td>
-                        <td colspan="2">
-                            <input type="file" name="boardFile" class="file" style="background-color: #49545d;">
+                        <td>
+                            <input type="file" name="boardFile" class="file" style="margin-top: 5px;">
                             <!-- 서버쪽에서 boardFile 이라는 이름으로 받을 수 있음  -->
                         
-                            
-                            <div class="input-group col-xs-12" >
+                            <!-- <div class="input-group col-xs-12" >
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
                                 <input type="text" class="form-control input-lg" disabled placeholder="파일을 업로드하세요">
                                 <span class="input-group-btn">
-                                    <button type="button" class="browse btn btn-primary input-lg"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button type="button" class="browse btn btn-primary input-lg" style="background-color: #3c90e2;"><i class="glyphicon glyphicon-search"></i>파일 찾기</button>
                                 </span>
-                            </div>
+                            </div> -->
                         </td>
                     </tr>
 
