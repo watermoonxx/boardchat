@@ -10,51 +10,57 @@
 <!-- CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
-<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap" rel="stylesheet">
+<title>LET'S CHAT!</title>
 <!-- JS -->
 <script src="js/bootstrap.js"></script>
 </head>
 <body>
 	<% 
+		
 		// userID로 세션 관리 
 		String userID = null;
 		if (session.getAttribute("userID") != null) {  
 			userID = (String) session.getAttribute("userID"); // 로그인을 했다면 session 값은 존재하는 것이고, userID에 해당 사용자의 값을 String으로 변환해서 넣어준다 -> 해당 사용자의 접속 유무를 파악할 수 있다 
 		}
+		
 	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
+	<nav class="navbar navbar-default" style="border: none;">
+		<!-- <div class="navbar-header">
 			<button type="button" class="navbar-toggle collapse" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 			</button>
-			<!-- logo -->
 			<a href="index.jsp" class="navbar-brand">logo</a> 
-		</div>
+		</div> -->
 	
 		<!-- navbar 메인 | 친구찾기 | 채팅 -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
-				<li><a href="find.jsp">친구찾기</a></li>
-				<li class="active"><a href="boardList.jsp">자유게시판</a></li>
-				<li><a href="chat.jsp">채팅</a></li>
+			<ul class="nav navbar-nav" style="padding-top: 10px;">
+				<li class="active"><a href="index.jsp" style="padding-top: 10px;">
+					<img src="./img/logo_chat.svg" alt="" style="width: 30px; height: 30px;">
+				</a></li>
+				<li><a class="nav-ele" href="find.jsp">친구찾기</a></li>
+				<li class="active"><a class="nav-ele" href="boardList.jsp">자유게시판</a></li>
+				<li><a class="nav-ele" href="chat.jsp">채팅</a></li>
 			</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
 			%>
 			<!-- 로그인을 하지 않은 상태일 때 -->
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="login.jsp">로그인</a></li>
-				<li><a href="join.jsp">회원가입</a></li>
+			<ul class="nav navbar-nav navbar-right" style="padding-top: 10px;">
+				<li><a class="nav-ele" href="login.jsp">로그인</a></li>
+				<li><a class="nav-ele" href="join.jsp">회원가입</a></li>
 			</ul>
 
 			<%
 				} else {
 			%>
 			<!-- 로그인한 상태일 때 -->
-			<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><%= userID %> 님</a></li>
-					<li><a href="update.jsp">회원정보수정</a></li>
-					<li><a href="logoutAction.jsp">로그아웃</a></li>
+			<ul class="nav navbar-nav navbar-right" style="padding-top: 10px;">
+					<li><a class="nav-ele" href="#"><%= userID %> 님</a></li>
+					<li><a class="nav-ele" href="update.jsp">회원정보수정</a></li>
+					<li><a class="nav-ele" href="logoutAction.jsp">로그아웃</a></li>
 			</ul>
 			<%
 				}
@@ -70,19 +76,19 @@
 					<th colspan="5"><h4>자유게시판</h4></th>
 				</tr>
 				<tr>
-					<th style="width: 70px; background-color: rgb(180, 220, 255);"><h5>번호</h5></th>
-					<th style="background-color: rgb(180, 220, 255);"><h5>제목</h5></th>
-					<th style="width: 100px; background-color: rgb(180, 220, 255);"><h5>작성자</h5></th>
-					<th style="width: 100px; background-color: rgb(180, 220, 255);"><h5>작성날짜</h5></th>
-					<th style="width: 70px; background-color: rgb(180, 220, 255);"><h5>조회수</h5></th>
+					<th style="width: 70px; background-color: #8CC5F9;"><h5>번호</h5></th>
+					<th style="background-color: #8CC5F9;"><h5>제목</h5></th>
+					<th style="width: 100px; background-color: #8CC5F9;"><h5>작성자</h5></th>
+					<th style="width: 120px; background-color: #8CC5F9;"><h5>작성날짜</h5></th>
+					<th style="width: 70px; background-color: #8CC5F9;"><h5>조회수</h5></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td>1</td>
-					<td>게시물제목예시</td>
+					<td>예시 텍스트 게시물제목</td>
 					<td>김자바</td>
-					<td>2023-05-25 예시</td>
+					<td>2023-05-25</td>
 					<td>999</td>
 				</tr>
 			</tbody>
