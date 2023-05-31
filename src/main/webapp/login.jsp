@@ -10,7 +10,10 @@
 <!-- CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
-<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap" rel="stylesheet">
+<title>LET'S CHAT!</title>
 <!-- JS -->
 <script src="js/bootstrap.js"></script>
 </head>
@@ -31,29 +34,30 @@
 			return; 
 		}
 	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
+	<nav class="navbar navbar-default" style="border: none;">
+		<!-- <div class="navbar-header">
 			<button type="button" class="navbar-toggle collapse" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 			</button>
-			<!-- logo -->
 			<a href="index.jsp" class="navbar-brand">logo</a> 
-		</div>
+		</div> -->
 	
 	<!-- navbar 메인 | 친구찾기 | 채팅 -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
-				<li><a href="find.jsp">친구찾기</a></li>
-				<li><a href="boardList.jsp">자유게시판</a></li>
-				<li><a href="chat.jsp">채팅</a></li>
-			</ul>
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav" style="padding-top: 10px;">
+			<li class="active"><a href="index.jsp" style="padding-top: 10px;">
+				<img src="./img/logo_chat.svg" alt="" style="width: 30px; height: 30px;">
+			</a></li>
+			<li><a class="nav-ele" href="find.jsp">친구찾기</a></li>
+			<li><a class="nav-ele" href="boardList.jsp">자유게시판</a></li>
+			<li><a class="nav-ele" href="chat.jsp">채팅</a></li>
+		</ul>
 			<%
 				if (userID == null) { // 로그인을 하지 않은 상태라면 
 			%>
 			<!-- 로그인을 하지 않은 상태일 때 -->
-			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="login.jsp">로그인</a></li>
-				<li><a href="join.jsp">회원가입</a></li>
+			<ul class="nav navbar-nav navbar-right" style="padding-top: 10px;">
+				<li class="active"><a class="nav-ele" href="login.jsp">로그인</a></li>
+				<li><a class="nav-ele" href="join.jsp">회원가입</a></li>
 			</ul>
 			<% 
 				} 
