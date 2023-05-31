@@ -7,7 +7,9 @@
 	if (session.getAttribute("userID") != null) { // 로그인을 했다면 
 		userID = (String) session.getAttribute("userID"); // session 값은 존재하는 것이고, userID에 해당 사용자의 값을 String으로 변환해서 넣어준다 -> 해당 사용자의 접속 유무를 파악할 수 있다 
 	}
-
+	
+	
+	
 	// 로그인이 되지 않은 상태에서 친구찾기 페이지에 접근했을 때 로그인 페이지로 돌려보냄 [9]
 	if (userID == null) {  
 		session.setAttribute("messageType", "알림 메시지");
@@ -15,6 +17,7 @@
 		response.sendRedirect("login.jsp");
 		return;
 	}
+	
 %>
 <html>
 <head>
@@ -25,7 +28,10 @@
 <!-- CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/custom.css">
-<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap" rel="stylesheet">
+<title>LET'S CHAT!</title>
 <!-- JS -->
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript">
@@ -96,28 +102,28 @@
 </script>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
+	<nav class="navbar navbar-default" style="border: none;">
+		<!-- <div class="navbar-header">
 			<button type="button" class="navbar-toggle collapse" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 			</button>
-			<!-- logo -->
-			<a href="index.jsp" class="navbar-brand">logo</a> 
-		</div>
+		</div> -->
 	
 		<!-- navbar 메인 | 친구찾기 | 채팅 -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index.jsp">메인</a></li>
-				<li class="active"><a href="find.jsp">친구찾기</a></li>
-				<li><a href="boardList.jsp">자유게시판</a></li>
-				<li><a href="chat.jsp">채팅</a></li>
+			<ul class="nav navbar-nav" style="padding-top: 10px;">
+				<li class="active"><a href="index.jsp" style="padding-top: 10px;">
+					<img src="./img/logo_chat.svg" alt="" style="width: 30px; height: 30px;">
+				</a></li>
+				<li><a class="nav-ele" href="find.jsp">친구찾기</a></li>
+				<li><a class="nav-ele" href="boardList.jsp">자유게시판</a></li>
+				<li><a class="nav-ele" href="chat.jsp">채팅</a></li>
 			</ul>
 
 			<!-- 로그인한 상태일 때 -->
-			<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><%= userID %> 님</a></li>
-					<li><a href="update.jsp">회원정보수정</a></li>
-					<li><a href="logoutAction.jsp">로그아웃</a></li>
+			<ul class="nav navbar-nav navbar-right" style="padding-top: 10px;">
+					<li><a class="nav-ele" href="#"><%= userID %> 님</a></li>
+					<li><a class="nav-ele" href="update.jsp">회원정보수정</a></li>
+					<li><a class="nav-ele" href="logoutAction.jsp">로그아웃</a></li>
 			</ul>
 		</div>
 	</nav>
