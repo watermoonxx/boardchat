@@ -1,5 +1,7 @@
 @charset "UTF-8";
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+
 @font-face {
 font-family: 'GmarketSansMedium';
 src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -8,9 +10,16 @@ font-style: normal;
 }
 
 * { 
-  font-family: 'Noto Sans KR', sans-serif;
- /* font-family: 'GmarketSansMedium'; */
+  /* font-family: 'Rubik', sans-serif; */
+  /* font-family: 'Noto Sans KR', sans-serif; */
+ font-family: 'GmarketSansMedium';
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+} 
 
 input, button {
   border-radius: 0;
@@ -21,6 +30,15 @@ input, button {
   justify-content: center;
 }
 .btn-flex > input {
+  width: 30%;
+  margin: 0 10px;
+  line-height: 45px;
+  font-size: 16px;
+  max-width: 180px;
+  background-color: #3c90e2;
+}
+
+.main-btn {
   width: 30%;
   margin: 0 10px;
   line-height: 45px;
@@ -102,6 +120,7 @@ a:hover {
   /* font-family: ; */
 }
 
+
 /* navbar 글자에 마우스를 올렸을 때 */
 /* .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
@@ -120,6 +139,71 @@ a:hover {
 .navbar-fixed-top {
   min-height: 70px;
 }
+
+.nav-ele {
+  font-size: 18px;
+}
+
+/* 메인 */
+
+
+.visual1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+
+}
+
+.visual1-left {
+  font-family: 'Rubik';
+  color: #8CC5F9;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 70px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* margin-bottom: 10px; */
+}
+
+.visual1-right {
+  margin-left: 60px;
+}
+
+/* 
+.main-btn {
+  position: absolute;
+  width: 250px;
+  height: 59px;
+  left: 420px;
+  top: 424px;
+} */
+
+.main-button {
+  height: 59px;
+  width: 180px;
+  background-color: #3c90e2;
+  font-size: 17px;
+  margin-top: 20px;
+}
+
+.main-text {
+  font-size: 17px;
+}
+
+.main-content {
+  position: absolute;
+  /* width: 550px;
+  height: 60px;
+  left: 150px;
+  top: 277px; */
+
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+}
+
+
+
 
 /* 친구찾기 */
 /* .searchCon {
