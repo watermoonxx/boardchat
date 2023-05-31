@@ -19,31 +19,6 @@ public class UserDAO {
 		
 	}
 	
-	// login 메소드
-		/*
-		public boolean login(String userID, String userPwd) {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			boolean flag = false;
-			
-			try {
-				con = pool.getConnection();
-				String sql = "SELECT USERID FROM USER WHERE USERID = ? AND USERPWD = ?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, userID);
-				pstmt.setString(2, userPwd);
-				rs = pstmt.executeQuery();
-				flag = rs.next();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				pool.freeConnection(con, pstmt, rs);
-			}
-			return flag;
-		}
-		*/
-		
 	
 	// 로그인 처리 함수 
 	public int login(String userID, String userPwd) {
