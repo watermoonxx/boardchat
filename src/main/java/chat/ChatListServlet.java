@@ -33,18 +33,20 @@ public class ChatListServlet extends HttpServlet {
 		} else if (listType.equals("ten")) {  
 			// 만약 listType이 ten 이라는 내용이라면, getTen() 함수를 실행해서 사용자에게 보여준다(데이터베이스에 접근해서 값을 출력)  
 			
-			response.getWriter().write(getTen(fromID, toID));
+			response.getWriter().write(getTen(URLDecoder.decode(fromID, "UTF-8"), URLDecoder.decode(toID, "UTF-8")));
 		} else { // 비어있지 않고, listType = "ten"은 아닌 경우 getID() 함수를 실행해서 사용자에게 보여준다(데이터베이스에 접근해서 값을 출력) 
 			try {
-				response.getWriter().write(getID(fromID, toID, listType));
+				response.getWriter().write(getID(URLDecoder.decode(fromID, "UTF-8"), URLDecoder.decode(toID, "UTF-8"), listType));
+				// 특정 채팅 아이디 값을 기준으로 대화를 불러오는 것 
+				
 			} catch (Exception e) {
-				response.getWriter().write("");  
+				response.getWriter().write(""); 
 			}
 		}
-		
+	}
 		
 		public String getTen(String fromID, String toID) {
-			StringBuffer result1 = new StringBuffer(""); // 인스턴스 생성 
+			StringBuffer result = new StringBuffer(""); // 인스턴스 생성 
 			// StringBuffer: 문자열을 저장하기 위한 클래스. String과 달리 내용을 변경할 수 있다(참조변수에 append() 가능)
 
 			
@@ -72,31 +74,32 @@ public class ChatListServlet extends HttpServlet {
 			    	
 			*/
 			
-			result1.append(" {\"result\":[ "); 
+			result.append(" {\"result\":[ "); 
+			// 참조 변수에 어떠한 값을 입력해 주는데, JSON이라는 형태가 사용되는데, JSON은 배열 같은 것들을 담아서 표현할 수 있다 
+			
 			ChatDAO chatDAO = new ChatDAO();
 			ArrayList<ChatDTO> chatList = chatDAO.getChatListByRecent(fromID, toID, 10);
 			
+			// 메시지가 담긴 chatList 
 			if (chatList.size() == 0) { // ArrayList에 저장된 객체의 개수가 0이면 
 				return ""; // 공백 반환 
 			}
 			
-			
-			
 			for (int i=0; i<chatList.size(); i++) {
-				result1.append(" [ {\"value\" : \"" + chatList.get(i).getFromID() + " \"}, ");
-				result1.append(" [ {\"value\" : \"" + chatList.get(i).getToID() + " \"}, ");
-				result1.append(" [ {\"value\" : \"" + chatList.get(i).getChatContent() + "\"}, ");
-				result1.append(" [ {\"value\" : \"" + chatList.get(i).getChatTime() + " \"} ");
+				result.append(" [ {\"value\" : \"" + chatList.get(i).getFromID() + " \"}, ");
+				result.append("  {\"value\" : \"" + chatList.get(i).getToID() + " \"}, ");
+				result.append("  {\"value\" : \"" + chatList.get(i).getChatContent() + "\"}, ");
+				result.append("  {\"value\" : \"" + chatList.get(i).getChatTime() + " \"}] ");
 				
-				if (i != chatList.size() -1) { // 마지막 원소가 아니라면 
-					result1.append(",");
+				if (i != chatList.size() - 1) { // 마지막 원소가 chatList.size() - 1 아니라면 
+					result.append(",");
 				}
 			}
-			result1.append("], \"last\":\"" + chatList.get(chatList.size() -1).getChatNum() + "\"}");
+			result.append("], \"last\":\"" + chatList.get(chatList.size() -1).getuserNum() + "\"}"); // 가장 마지막에 해당하는 userNum을 가지고 온다 
 			
 			// JSON 형태의 문자열 반환
-			return result1.toString();
-		}
+			return result.toString();
+		
 		
 
 		/* 회원정보수정 관련 [18]
@@ -111,10 +114,37 @@ public class ChatListServlet extends HttpServlet {
 		return;
 		*/
 		
+		}
 		
-		
-		
+		public String getID(String fromID, String toID, String userNum) {
+			StringBuffer result = new StringBuffer(""); // 인스턴스 생성 
+			result.append(" {\"result\":[ "); 
+			ChatDAO chatDAO = new ChatDAO();
+			ArrayList<ChatDTO> chatList = chatDAO.getChatListByID(fromID, toID, userNum);
+			
+			if (chatList.size() == 0) { // ArrayList에 저장된 객체의 개수가 0이면 
+				return ""; // 공백 반환 
+			}
+			
+			
+			
+			for (int i=0; i<chatList.size(); i++) {
+				result.append(" [ {\"value\" : \"" + chatList.get(i).getFromID() + " \"}, ");
+				result.append("  {\"value\" : \"" + chatList.get(i).getToID() + " \"}, ");
+				result.append("  {\"value\" : \"" + chatList.get(i).getChatContent() + "\"}, ");
+				result.append("  {\"value\" : \"" + chatList.get(i).getChatTime() + " \"}] ");
+				
+				if (i != chatList.size()-1) { // 마지막 원소가 chatList.size()-1 아니라면 
+					result.append(",");
+				}
+			}
+			result.append("], \"last\":\"" + chatList.get(chatList.size() - 1).getuserNum() + "\"}"); // 가장 마지막에 해당하는 userNum을 가지고 온다 
+			
+			// JSON 형태의 문자열 반환
+			return result.toString();
 			
 		}
+			
+		
 
 }
