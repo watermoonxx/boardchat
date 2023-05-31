@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap" rel="stylesheet">
+<title>LET'S CHAT!</title>
 </head>
 <body>
 	<%
@@ -14,8 +17,6 @@
 		request.getSession().setAttribute("messageContent", "로그아웃 되었습니다.");
 	%>
 	<script>
-		// alert("로그아웃 되었습니다");
-		
 		location.href = "index.jsp";
 	</script>
 </body>
